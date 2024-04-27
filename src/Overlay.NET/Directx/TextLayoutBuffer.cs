@@ -1,9 +1,11 @@
 using SharpDX.DirectWrite;
 
-namespace Overlay.NET.Directx {
+namespace Overlay.NET.Directx
+{
     /// <summary>
     /// </summary>
-    internal class TextLayoutBuffer {
+    internal class TextLayoutBuffer
+    {
         /// <summary>
         ///     The text
         /// </summary>
@@ -19,7 +21,8 @@ namespace Overlay.NET.Directx {
         /// </summary>
         /// <param name="text">The text.</param>
         /// <param name="layout">The layout.</param>
-        public TextLayoutBuffer(string text, TextLayout layout) {
+        public TextLayoutBuffer(string text, TextLayout layout)
+        {
             Text = text;
             TextLayout = layout;
             TextLayout.TextAlignment = TextAlignment.Leading;
@@ -29,7 +32,8 @@ namespace Overlay.NET.Directx {
         /// <summary>
         ///     Releases unmanaged and - optionally - managed resources.
         /// </summary>
-        public void Dispose() {
+        public void Dispose()
+        {
             TextLayout.Dispose();
             Text = null;
         }

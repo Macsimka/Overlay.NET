@@ -1,16 +1,18 @@
-using System;
-using System.Diagnostics;
-using System.Drawing;
 using Overlay.NET.Common;
 using Overlay.NET.Demo.Internals;
 using Overlay.NET.Directx;
 using Process.NET.Windows;
+using System;
+using System.Diagnostics;
+using System.Drawing;
 
-namespace Overlay.NET.Demo.Directx {
+namespace Overlay.NET.Demo.Directx
+{
     [RegisterPlugin("DirectXverlayDemo-1", "Jacob Kemple", "DirectXOverlayDemo", "0.0",
         "A basic demo of the DirectXoverlay.")]
-    public class DirectxOverlayPluginExample : DirectXOverlayPlugin {
-        private readonly TickEngine _tickEngine = new TickEngine();
+    public class DirectxOverlayPluginExample : DirectXOverlayPlugin
+    {
+        private readonly TickEngine _tickEngine = new();
         public readonly ISettings<DemoOverlaySettings> Settings = new SerializableSettings<DemoOverlaySettings>();
         private int _displayFps;
         private int _font;
@@ -22,7 +24,8 @@ namespace Overlay.NET.Demo.Directx {
         private float _rotation;
         private Stopwatch _watch;
 
-        public override void Initialize(IWindow targetWindow) {
+        public override void Initialize(IWindow targetWindow)
+        {
             // Set target window by calling the base method
             base.Initialize(targetWindow);
 
@@ -63,44 +66,50 @@ namespace Overlay.NET.Demo.Directx {
             _tickEngine.Tick += OnTick;
         }
 
-        private void OnTick(object sender, EventArgs e) {
-            if (!OverlayWindow.IsVisible) {
+        private void OnTick(object sender, EventArgs e)
+        {
+            if (!OverlayWindow.IsVisible)
                 return;
-            }
 
             OverlayWindow.Update();
             InternalRender();
         }
 
-        private void OnPreTick(object sender, EventArgs e) {
+        private void OnPreTick(object sender, EventArgs e)
+        {
             var targetWindowIsActivated = TargetWindow.IsActivated;
-            if (!targetWindowIsActivated && OverlayWindow.IsVisible) {
+
+            if (!targetWindowIsActivated && OverlayWindow.IsVisible)
+            {
                 _watch.Stop();
                 ClearScreen();
                 OverlayWindow.Hide();
             }
-            else if (targetWindowIsActivated && !OverlayWindow.IsVisible) {
+            else if (targetWindowIsActivated && !OverlayWindow.IsVisible)
                 OverlayWindow.Show();
-            }
         }
 
         // ReSharper disable once RedundantOverriddenMember
-        public override void Enable() {
+        public override void Enable()
+        {
             _tickEngine.Interval = Settings.Current.UpdateRate.Milliseconds();
             _tickEngine.IsTicking = true;
             base.Enable();
         }
 
         // ReSharper disable once RedundantOverriddenMember
-        public override void Disable() {
+        public override void Disable()
+        {
             _tickEngine.IsTicking = false;
             base.Disable();
         }
 
         public override void Update() => _tickEngine.Pulse();
 
-        protected void InternalRender() {
-            if (!_watch.IsRunning) {
+        protected void InternalRender()
+        {
+            if (!_watch.IsRunning)
+            {
                 _watch.Start();
             }
 
@@ -152,27 +161,28 @@ namespace Overlay.NET.Demo.Directx {
                 _rotation = -50.0f;
             }
 
-            if (_watch.ElapsedMilliseconds > 1000) {
+            if (_watch.ElapsedMilliseconds > 1000)
+            {
                 _i = _displayFps;
                 _displayFps = 0;
                 _watch.Restart();
             }
-
-            else {
+            else
                 _displayFps++;
-            }
 
             OverlayWindow.Graphics.DrawText("FPS: " + _i, _hugeFont, _redBrush, 400, 600, false);
 
             OverlayWindow.Graphics.EndScene();
         }
 
-        public override void Dispose() {
+        public override void Dispose()
+        {
             OverlayWindow.Dispose();
             base.Dispose();
         }
 
-        private void ClearScreen() {
+        private void ClearScreen()
+        {
             OverlayWindow.Graphics.BeginScene();
             OverlayWindow.Graphics.ClearScene();
             OverlayWindow.Graphics.EndScene();

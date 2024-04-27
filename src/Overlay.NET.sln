@@ -1,11 +1,11 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overlay.NET", "Overlay.NET\Overlay.NET.csproj", "{2D411EA5-BC00-4630-B25E-43C554323E72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Overlay.NET", "Overlay.NET\Overlay.NET.csproj", "{2D411EA5-BC00-4630-B25E-43C554323E72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overlay.NET.Demo", "Overlay.NET.Demo\Overlay.NET.Demo.csproj", "{DBC09A34-CD3F-4D2A-8DD4-C768D36284FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Overlay.NET.Demo", "Overlay.NET.Demo\Overlay.NET.Demo.csproj", "{DBC09A34-CD3F-4D2A-8DD4-C768D36284FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

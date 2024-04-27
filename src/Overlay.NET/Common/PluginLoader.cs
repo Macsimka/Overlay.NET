@@ -4,11 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace Overlay.NET.Common {
+namespace Overlay.NET.Common
+{
     /// <summary>
     ///     Contains static methods for loading plugin types from .dll files.
     /// </summary>
-    public static class PluginLoader {
+    public static class PluginLoader
+    {
         /// <summary>
         ///     Creates instances of all the given types that are instanciable plugins.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Overlay.NET.Common {
         public static IEnumerable<TPlugin> InstanciatePlugins<TPlugin>(IEnumerable<Type> types, params object[] args)
             where TPlugin : PluginBase => from type in types
                                           where IsInstanciablePlugin(type)
-                                          select (TPlugin) Activator.CreateInstance(type, args);
+                                          select (TPlugin)Activator.CreateInstance(type, args);
 
         /// <summary>
         ///     Determines whether the given Type is an instanciable plugin or not.

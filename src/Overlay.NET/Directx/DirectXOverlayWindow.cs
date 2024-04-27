@@ -1,10 +1,10 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Overlay.NET.Common;
+﻿using Overlay.NET.Common;
+using System;
 
-namespace Overlay.NET.Directx {
-    public class DirectXOverlayWindow {
+namespace Overlay.NET.Directx
+{
+    public class DirectXOverlayWindow
+    {
         /// <summary>
         ///     Gets a value indicating whether this instance is disposing.
         /// </summary>
@@ -100,7 +100,8 @@ namespace Overlay.NET.Directx {
         /// </summary>
         /// <param name="limitFps">VSync</param>
         /// <exception cref="Exception">Could not create OverlayWindow</exception>
-        public DirectXOverlayWindow(bool limitFps = true) {
+        public DirectXOverlayWindow(bool limitFps = true)
+        {
             IsDisposing = false;
             IsVisible = true;
             IsTopMost = true;
@@ -114,7 +115,8 @@ namespace Overlay.NET.Directx {
 
             ParentWindow = IntPtr.Zero;
 
-            if (!CreateWindow()) {
+            if (!CreateWindow())
+            {
                 throw new Exception("Could not create OverlayWindow");
             }
 
@@ -133,13 +135,14 @@ namespace Overlay.NET.Directx {
         ///     or
         ///     Could not create OverlayWindow
         /// </exception>
-        public DirectXOverlayWindow(IntPtr parent, bool limitFps = true) {
-            if (parent == IntPtr.Zero) {
+        public DirectXOverlayWindow(IntPtr parent, bool limitFps = true)
+        {
+            if (parent == IntPtr.Zero)
+            {
                 throw new Exception("The handle of the parent window isn't valid");
             }
 
-            Native.Rect bounds;
-            Native.GetWindowRect(parent, out bounds);
+            Native.GetWindowRect(parent, out Native.Rect bounds);
 
             IsDisposing = false;
             IsVisible = true;
@@ -155,7 +158,8 @@ namespace Overlay.NET.Directx {
 
             ParentWindow = parent;
 
-            if (!CreateWindow()) {
+            if (!CreateWindow())
+            {
                 throw new Exception("Could not create OverlayWindow");
             }
 
@@ -167,14 +171,16 @@ namespace Overlay.NET.Directx {
         /// <summary>
         ///     Finalizes an instance of the <see cref="DirectXOverlayWindow" /> class.
         /// </summary>
-        ~DirectXOverlayWindow() {
+        ~DirectXOverlayWindow()
+        {
             Dispose();
         }
 
         /// <summary>
         ///     Clean up used ressources and destroy window
         /// </summary>
-        public void Dispose() {
+        public void Dispose()
+        {
             IsDisposing = true;
             Graphics.Dispose();
             Native.DestroyWindow(Handle);
@@ -186,7 +192,8 @@ namespace Overlay.NET.Directx {
         /// <returns>
         ///     true on success
         /// </returns>
-        private bool CreateWindow() {
+        private bool CreateWindow()
+        {
             Handle = Native.CreateWindowEx(
                 WindowConstants.WindowExStyleDx,
                 WindowConstants.DesktopClass,
@@ -201,7 +208,8 @@ namespace Overlay.NET.Directx {
                 IntPtr.Zero,
                 IntPtr.Zero);
 
-            if (Handle == IntPtr.Zero) {
+            if (Handle == IntPtr.Zero)
+            {
                 return false;
             }
 
@@ -215,15 +223,16 @@ namespace Overlay.NET.Directx {
         /// <summary>
         /// Resize and set new position if the parent window's bounds change
         /// </summary>
-        public void Update() {
+        public void Update()
+        {
             if (!ParentWindowExists)
                 return;
 
-            Native.Rect bounds;
-            Native.GetWindowRect(ParentWindow, out bounds);
+            Native.GetWindowRect(ParentWindow, out Native.Rect bounds);
 
             if (X != bounds.Left || Y != bounds.Top || Width != bounds.Right - bounds.Left ||
-                Height != bounds.Bottom - bounds.Top) {
+                Height != bounds.Bottom - bounds.Top)
+            {
                 SetBounds(bounds.Left, bounds.Top, bounds.Right - bounds.Left, bounds.Bottom - bounds.Top);
             }
         }
@@ -231,7 +240,8 @@ namespace Overlay.NET.Directx {
         /// <summary>
         ///     Extends the frame into client.
         /// </summary>
-        private void ExtendFrameIntoClient() {
+        private void ExtendFrameIntoClient()
+        {
             _margin.cxLeftWidth = X;
             _margin.cxRightWidth = Width;
             _margin.cyBottomHeight = Height;
@@ -244,7 +254,8 @@ namespace Overlay.NET.Directx {
         /// </summary>
         /// <param name="x">The x.</param>
         /// <param name="y">The y.</param>
-        public void SetPos(int x, int y) {
+        public void SetPos(int x, int y)
+        {
             X = x;
             Y = y;
 
@@ -258,7 +269,8 @@ namespace Overlay.NET.Directx {
         /// </summary>
         /// <param name="width">The width.</param>
         /// <param name="height">The height.</param>
-        public void SetSize(int width, int height) {
+        public void SetSize(int width, int height)
+        {
             Width = width;
             Height = height;
 
@@ -276,7 +288,8 @@ namespace Overlay.NET.Directx {
         /// <param name="y">The y.</param>
         /// <param name="width">The width.</param>
         /// <param name="height">The height.</param>
-        public void SetBounds(int x, int y, int width, int height) {
+        public void SetBounds(int x, int y, int width, int height)
+        {
             X = x;
             Y = y;
             Width = width;
@@ -292,8 +305,10 @@ namespace Overlay.NET.Directx {
         /// <summary>
         ///     Shows this instance.
         /// </summary>
-        public void Show() {
-            if (IsVisible) {
+        public void Show()
+        {
+            if (IsVisible)
+            {
                 return;
             }
 
@@ -306,8 +321,10 @@ namespace Overlay.NET.Directx {
         /// <summary>
         ///     Hides this instance.
         /// </summary>
-        public void Hide() {
-            if (!IsVisible) {
+        public void Hide()
+        {
+            if (!IsVisible)
+            {
                 return;
             }
 

@@ -1,6 +1,8 @@
-namespace Overlay.NET.Demo.Internals {
+namespace Overlay.NET.Demo.Internals
+{
     // Example settings
-    public class DemoOverlaySettings {
+    public class DemoOverlaySettings
+    {
         // 60 frames/sec roughly
         public int UpdateRate { get; set; }
 

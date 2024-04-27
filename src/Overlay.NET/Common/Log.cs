@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Overlay.NET.Common {
-    public enum LogLevel {
+namespace Overlay.NET.Common
+{
+    public enum LogLevel
+    {
         Normal,
         Debug,
         Information,
@@ -12,16 +14,19 @@ namespace Overlay.NET.Common {
         Fatal
     }
 
-    public interface ILogger {
+    public interface ILogger
+    {
         void WriteLine(string line);
     }
 
-    public static class Log {
+    public static class Log
+    {
         public static Func<LogLevel, string, object[], string> LogFormatterFunc { get; set; }
 
         private static Dictionary<string, ILogger> Loggers { get; }
 
-        static Log() {
+        static Log()
+        {
             Loggers = new Dictionary<string, ILogger>();
             LogFormatterFunc = DefaultFormatter;
             Loggers.Add("File", FileLogger.Instance);
@@ -45,16 +50,20 @@ namespace Overlay.NET.Common {
 
         public static void Fatal(string format, params object[] args) => WriteLogEntry(LogLevel.Fatal, format, args);
 
-        private static void WriteLogEntry(LogLevel logLevel, string format, params object[] args) {
+        private static void WriteLogEntry(LogLevel logLevel, string format, params object[] args)
+        {
             var formatted = LogFormatterFunc(logLevel, format, args);
 
-            foreach (var logger in Loggers.ToArray()) {
+            foreach (var logger in Loggers.ToArray())
+            {
                 logger.Value.WriteLine(formatted);
             }
         }
 
-        private static string DefaultFormatter(LogLevel type, string format, params object[] args) {
-            if (args != null && args.Any()) {
+        private static string DefaultFormatter(LogLevel type, string format, params object[] args)
+        {
+            if (args != null && args.Any())
+            {
                 format = string.Format(format, args);
             }
 

@@ -1,10 +1,12 @@
 using System;
 
-namespace Overlay.NET.Common {
+namespace Overlay.NET.Common
+{
     /// <summary>
     /// </summary>
     /// <seealso cref="System.EventArgs" />
-    public sealed class WaitTimerEventArgs : EventArgs {
+    public sealed class WaitTimerEventArgs : EventArgs
+    {
         /// <summary>
         ///     Gets or sets the time finished.
         /// </summary>
@@ -32,7 +34,8 @@ namespace Overlay.NET.Common {
 
     /// <summary>
     /// </summary>
-    public class WaitTimer {
+    public class WaitTimer
+    {
         /// <summary>
         ///     Gets or sets the wait time.
         /// </summary>
@@ -77,7 +80,8 @@ namespace Overlay.NET.Common {
         ///     Initializes a new instance of the <see cref="WaitTimer" /> class.
         /// </summary>
         /// <param name="waitTime">The wait time.</param>
-        public WaitTimer(TimeSpan waitTime) {
+        public WaitTimer(TimeSpan waitTime)
+        {
             WaitTime = waitTime;
             Stop();
         }
@@ -85,7 +89,8 @@ namespace Overlay.NET.Common {
         /// <summary>
         ///     Initializes a new instance of the <see cref="WaitTimer" /> class.
         /// </summary>
-        public WaitTimer() {
+        public WaitTimer()
+        {
             WaitTime = TimeSpan.Zero;
             Stop();
         }
@@ -109,12 +114,15 @@ namespace Overlay.NET.Common {
         ///     Updates this instance.
         /// </summary>
         /// <returns></returns>
-        public bool Update() {
-            if (!IsFinished) {
+        public bool Update()
+        {
+            if (!IsFinished)
+            {
                 return false;
             }
 
-            OnFinished(new WaitTimerEventArgs {
+            OnFinished(new WaitTimerEventArgs
+            {
                 TimeFinished = DateTime.Now,
                 TimeStarted = StartTime,
                 WaitTime = WaitTime

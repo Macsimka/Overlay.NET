@@ -1,8 +1,10 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Overlay.NET.Common {
-    internal class Native {
+namespace Overlay.NET.Common
+{
+    internal class Native
+    {
         [DllImport("user32.dll")]
         public static extern IntPtr CreateWindowEx(
             uint dwExStyle,
@@ -67,7 +69,8 @@ namespace Overlay.NET.Common {
         public static IntPtr GetWindowLongPtr(IntPtr hWnd, int nIndex) => IntPtr.Size == 8 ? GetWindowLongPtr64(hWnd, nIndex) : GetWindowLongPtr32(hWnd, nIndex);
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct Rect {
+        public struct Rect
+        {
             public int Left;
             public int Top;
             public int Right;
@@ -75,13 +78,15 @@ namespace Overlay.NET.Common {
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct Point {
+        public struct Point
+        {
             public int X;
             public int Y;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct RawMargin {
+        public struct RawMargin
+        {
             public int cxLeftWidth;
             public int cxRightWidth;
             public int cyTopHeight;

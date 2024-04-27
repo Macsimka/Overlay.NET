@@ -1,14 +1,16 @@
-using System;
 using Overlay.NET.Common;
 using Process.NET.Windows;
+using System;
 
-namespace Overlay.NET {
+namespace Overlay.NET
+{
     /// <summary>
     ///     Abstract class that defines basic overlay operations and values.
     /// </summary>
-    /// <seealso cref="Overlay.NET.Common.PluginBase" />
-    /// <seealso cref="System.IDisposable" />
-    public abstract class OverlayPlugin : PluginBase, IDisposable {
+    /// <seealso cref="PluginBase" />
+    /// <seealso cref="IDisposable" />
+    public abstract class OverlayPlugin : PluginBase, IDisposable
+    {
         /// <summary>
         ///     Gets or sets the target window that the overlay is to 'attach' to.
         /// </summary>
@@ -28,7 +30,7 @@ namespace Overlay.NET {
         /// <summary>
         ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
-        public virtual void Dispose() {}
+        public virtual void Dispose() { }
 
         /// <summary>
         ///     Enables this instance.
@@ -49,6 +51,6 @@ namespace Overlay.NET {
         /// <summary>
         ///     Updates this instance.
         /// </summary>
-        public virtual void Update() {}
+        public virtual void Update() { }
     }
 }

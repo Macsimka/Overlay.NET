@@ -2,19 +2,24 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
-namespace Overlay.NET.Common {
-    public sealed class FileLogger : ILogger {
+namespace Overlay.NET.Common
+{
+    public sealed class FileLogger : ILogger
+    {
         public string Path { get; set; }
 
         public bool IsDisposed { get; set; }
         public bool MustBeDisposed { get; set; } = true;
 
-        public void WriteLine(string entry) {
-            try {
+        public void WriteLine(string entry)
+        {
+            try
+            {
                 _stream.WriteLine(entry);
             }
 
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Trace.WriteLine(e.Message);
             }
         }
@@ -23,18 +28,22 @@ namespace Overlay.NET.Common {
 
         private readonly StreamWriter _stream;
 
-        public FileLogger(RelativeFile file) {
+        public FileLogger(RelativeFile file)
+        {
             Path = file.GetFullPath();
-            _stream = new StreamWriter(Path, true) {AutoFlush = true};
+            _stream = new StreamWriter(Path, true) { AutoFlush = true };
         }
 
-        public FileLogger(string file) {
+        public FileLogger(string file)
+        {
             Path = file;
-            _stream = new StreamWriter(Path, true) {AutoFlush = true};
+            _stream = new StreamWriter(Path, true) { AutoFlush = true };
         }
 
-        private FileLogger() {
-            var file = new RelativeFile {
+        private FileLogger()
+        {
+            var file = new RelativeFile
+            {
                 Name = "AppLog",
                 Extension = ".txt",
                 SubDirectory = "Logs",
@@ -43,11 +52,13 @@ namespace Overlay.NET.Common {
             };
 
             Path = file.GetFullPath();
-            _stream = new StreamWriter(Path, true) {AutoFlush = true};
+            _stream = new StreamWriter(Path, true) { AutoFlush = true };
         }
 
-        public void Dispose() {
-            if (IsDisposed) {
+        public void Dispose()
+        {
+            if (IsDisposed)
+            {
                 return;
             }
             IsDisposed = true;

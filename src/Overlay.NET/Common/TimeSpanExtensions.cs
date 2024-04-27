@@ -1,7 +1,9 @@
 using System;
 
-namespace Overlay.NET.Common {
-    public static class TimeSpanExtensions {
+namespace Overlay.NET.Common
+{
+    public static class TimeSpanExtensions
+    {
         public static TimeSpan Days(this int days) => new TimeSpan(days, 0, 0, 0);
 
         public static TimeSpan Hours(this int hours) => new TimeSpan(0, hours, 0, 0);

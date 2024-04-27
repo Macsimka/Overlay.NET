@@ -1,16 +1,19 @@
 using System;
 
-namespace Overlay.NET.Common {
+namespace Overlay.NET.Common
+{
     /// <summary>
     /// </summary>
-    public class TickEngine {
+    public class TickEngine
+    {
         /// <summary>
         ///     Gets or sets the interval.
         /// </summary>
         /// <value>
         ///     The interval.
         /// </value>
-        public TimeSpan Interval {
+        public TimeSpan Interval
+        {
             get { return _waitTimer.WaitTime; }
             set { _waitTimer.WaitTime = value; }
         }
@@ -51,12 +54,15 @@ namespace Overlay.NET.Common {
         /// <summary>
         ///     Pulses this instance.
         /// </summary>
-        public void Pulse() {
-            if (!IsTicking) {
+        public void Pulse()
+        {
+            if (!IsTicking)
+            {
                 return;
             }
 
-            if (!_waitTimer.Update()) {
+            if (!_waitTimer.Update())
+            {
                 return;
             }
 

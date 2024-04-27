@@ -1,7 +1,9 @@
-namespace Overlay.NET.Common {
+namespace Overlay.NET.Common
+{
     /// <summary>
     /// </summary>
-    internal class WindowConstants {
+    internal class WindowConstants
+    {
         /// <summary>
         ///     The sm cx screen
         /// </summary>
