@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Overlay.NET.Common
 {
-    internal class Native
+    public class Native
     {
         [DllImport("user32.dll")]
         public static extern IntPtr CreateWindowEx(
@@ -24,8 +24,13 @@ namespace Overlay.NET.Common
         public static extern int DestroyWindow(IntPtr hwnd);
 
         [DllImport("user32.dll")]
-        public static extern int SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int y, int cx, int cy,
-            uint uFlags);
+        public static extern int SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int y, int cx, int cy, uint uFlags);
+
+        [DllImport("user32.dll")]
+        public static extern nint FindWindow(string lpClassName, string lpWindowName);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetForegroundWindow();
 
         [DllImport("user32.dll")]
         public static extern IntPtr GetDesktopWindow();

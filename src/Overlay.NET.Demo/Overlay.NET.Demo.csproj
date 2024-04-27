@@ -9,7 +9,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Overlay.NET\Overlay.NET.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Process.NET" Version="1.0.8" />
-  </ItemGroup>
 </Project>

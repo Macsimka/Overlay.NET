@@ -1,36 +1,31 @@
 using Overlay.NET.Common;
-using Process.NET;
-using Process.NET.Memory;
 using System;
 using System.Globalization;
-using System.Linq;
 
 namespace Overlay.NET.Demo.Directx
 {
     public class DirectXOverlayDemo
     {
         private OverlayPlugin _directXoverlayPluginExample;
-        private ProcessSharp _processSharp;
 
         public void StartDemo()
         {
             Log.Debug(@"Please type the process name of the window you want to attach to, e.g 'notepad.");
             Log.Debug("Note: If there is more than one process found, the first will be used.");
 
-            var processName = Console.ReadLine();
+            var windowName = Console.ReadLine();
 
-            var process = System.Diagnostics.Process.GetProcessesByName(processName).FirstOrDefault();
-            if (process == null)
+            IntPtr windowHandle = Native.FindWindow(null, windowName);
+
+            if (windowHandle == IntPtr.Zero)
             {
-                Log.Warn($"No process by the name of {processName} was found.");
+                Log.Warn($"No window by the name of {windowName} was found.");
                 Log.Warn("Please open one or use a different name and restart the demo.");
                 Console.ReadLine();
                 return;
             }
 
             _directXoverlayPluginExample = new DirectxOverlayPluginExample();
-            _processSharp = new ProcessSharp(process, MemoryType.Remote);
-
             Log.Debug("Enter the frame rate the overlay should render at. e.g '60'");
             var result = Console.ReadLine();
 
@@ -44,7 +39,7 @@ namespace Overlay.NET.Demo.Directx
 
             var d3DOverlay = (DirectxOverlayPluginExample)_directXoverlayPluginExample;
             d3DOverlay.Settings.Current.UpdateRate = 1000 / fps;
-            _directXoverlayPluginExample.Initialize(_processSharp.WindowFactory.MainWindow);
+            _directXoverlayPluginExample.Initialize(windowHandle);
             _directXoverlayPluginExample.Enable();
 
             // Log some info about the overlay.

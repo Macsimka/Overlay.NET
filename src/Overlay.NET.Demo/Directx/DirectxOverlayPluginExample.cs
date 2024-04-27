@@ -1,7 +1,6 @@
 using Overlay.NET.Common;
 using Overlay.NET.Demo.Internals;
 using Overlay.NET.Directx;
-using Process.NET.Windows;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -24,10 +23,10 @@ namespace Overlay.NET.Demo.Directx
         private float _rotation;
         private Stopwatch _watch;
 
-        public override void Initialize(IWindow targetWindow)
+        public override void Initialize(IntPtr targetWindowHandle)
         {
             // Set target window by calling the base method
-            base.Initialize(targetWindow);
+            base.Initialize(targetWindowHandle);
 
             // For demo, show how to use settings
             var current = Settings.Current;
@@ -47,7 +46,7 @@ namespace Overlay.NET.Demo.Directx
             Settings.Load();
             Console.Title = @"OverlayExample";
 
-            OverlayWindow = new DirectXOverlayWindow(targetWindow.Handle, false);
+            OverlayWindow = new DirectXOverlayWindow(targetWindowHandle, false);
             _watch = Stopwatch.StartNew();
 
             _redBrush = OverlayWindow.Graphics.CreateBrush(0x7FFF0000);
@@ -77,7 +76,7 @@ namespace Overlay.NET.Demo.Directx
 
         private void OnPreTick(object sender, EventArgs e)
         {
-            var targetWindowIsActivated = TargetWindow.IsActivated;
+            var targetWindowIsActivated = IsActive();
 
             if (!targetWindowIsActivated && OverlayWindow.IsVisible)
             {

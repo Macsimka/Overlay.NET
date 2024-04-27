@@ -1,5 +1,4 @@
 using Overlay.NET.Common;
-using Process.NET.Windows;
 using System;
 
 namespace Overlay.NET
@@ -17,7 +16,7 @@ namespace Overlay.NET
         /// <value>
         ///     The target window.
         /// </value>
-        public IWindow TargetWindow { get; protected set; }
+        public IntPtr TargetWindowHandle { get; protected set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this instance is enabled.
@@ -43,10 +42,12 @@ namespace Overlay.NET
         public virtual void Disable() => IsEnabled = false;
 
         /// <summary>
-        ///     Initializes the specified target window.
+        ///     Initializes the specified target window handle.
         /// </summary>
-        /// <param name="targetWindow">The target window.</param>
-        public virtual void Initialize(IWindow targetWindow) => TargetWindow = targetWindow;
+        /// <param name="targetWindowHandle">The target window handle.</param>
+        public virtual void Initialize(IntPtr targetWindowHandle) => TargetWindowHandle = targetWindowHandle;
+
+        public bool IsActive() => Native.GetForegroundWindow() == TargetWindowHandle;
 
         /// <summary>
         ///     Updates this instance.
